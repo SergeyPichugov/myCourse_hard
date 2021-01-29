@@ -5,8 +5,8 @@ const num = 266219;
 function multi(num) {
    let answer = 1;
    let tmp = 0;
-
       while (num ) {
+         
          tmp = num % 10;
          num = (num - tmp) / 10;
          answer = answer * tmp; 
