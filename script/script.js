@@ -1,26 +1,44 @@
-"use strict";
+'use strict';
 
-const num = 266219;
+let lang = 'ru';
 
-function multi(num) {
-   let answer = 1;
-   let tmp = 0;
-      while (num ) {
-         
-         tmp = num % 10;
-         num = (num - tmp) / 10;
-         answer = answer * tmp; 
-         
-      } return answer;
-} 
+const ruCalendar = ['понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье'],
+      enCalendar = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'],
+      multiArr = [['понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье'],
+                  ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']];
 
-console.log(multi(266219));
+const result = lang === 'ru' ? console.log(...multiArr[0]) : console.log(...multiArr[1]);
+
+if (lang === 'ru') {
+   for (let i = 0; i < ruCalendar.length; i++) {
+      console.log(ruCalendar[i]);
+   }
+} else if (lang === 'en') {
+   for (let i = 0; i < enCalendar.length; i++) {
+      console.log(enCalendar[i]);
+   }
+} else {
+   console.log('что-то пошло не так...');
+}
 
 
-const power = (multi(266219)) ** 3;
-console.log('power: ', power);
+switch (lang) {
+   case 'ru': 
+      for (let i = 0; i < ruCalendar.length; i++) {
+         console.log(ruCalendar[i]);
+      }
+      break;
+   case 'en':
+      for (let i = 0; i < enCalendar.length; i++) {
+         console.log(enCalendar[i]);
+      }
+      break;
+   default:
+      console.log('что-то пошло не так...');
+}
 
+////////////////////////////....part 2....////////////////////////
+const namePerson = 'Максим';
 
-
-console.log(power.toString().substring(0,2));
-
+const hello = namePerson === 'Артем' ? console.log('директор') : 
+            namePerson === 'Максим' ? console.log('преподаватель') : console.log('студент');
