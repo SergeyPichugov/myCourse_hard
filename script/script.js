@@ -4,10 +4,14 @@ let lang = 'ru';
 
 const ruCalendar = ['понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье'],
       enCalendar = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'],
-      multiArr = [['понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье'],
-                  ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']];
+      multiArr = new Map ([
+            ['ru', ruCalendar], 
+            ['en', enCalendar]
+         ]);
+         
 
-const result = lang === 'ru' ? console.log(...multiArr[0]) : console.log(...multiArr[1]);
+const result = multiArr.get(lang) ? multiArr.get(lang).forEach(element => console.log(element)) :
+                        console.log('что-то пошло не так...');
 
 if (lang === 'ru') {
    for (let i = 0; i < ruCalendar.length; i++) {
