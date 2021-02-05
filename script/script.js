@@ -1,73 +1,34 @@
 'use strict';
 
-const isNumber = function (n) {
-   return !isNaN(parseFloat(n)) && isFinite(n);
-};
+const week = ['понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье'];
 
-const arr = ['15656', '25656', '35656', '45656', '55656', '65656', '75656'];
+let now = new Date().getDay();
 
-function resultArr() {
-   for (let i = 0; i < arr.length; i++) {
-      let tmp = arr[i];
+for (let i = 0; i < week.length; i++) {
 
-      if (!isNumber(tmp)) {
-         console.log(tmp + ' - это не число');
-      } else if (tmp.indexOf(2) === 0 || tmp.indexOf(4) === 0) {
-         console.log(tmp);
-      }
+   let everyDay = document.createElement('div');
+
+   
+   if (i === 5 || i === 6 ) {
+      everyDay.className = "italic";
+   } else {
+      everyDay.className = "text";
    }
-} 
-
-
-resultArr(arr);
-
-////////////////.....2 часть ...//////////////////// 
-
-
-let n = 100;
-
-let checkSimpl = function(n) {
-   for (let i = 2; i < n; i++) {
-      if (n % i === 0) {
-         return false;
-      }
+   
+   if ((now - 1) === i) {
+      everyDay.classList.add('nowDay');
    }
-   return true;
-};
 
-let simplArr = function () {
-   for (let i = 2; i <=n; i++) {
-
-      if (checkSimpl(i)) {
-         console.log(i + '  Делители этого числа: 1 и ' + i);
-      }
-
+   if (now === 0  && i === 6) {
+      everyDay.classList.add('nowDay');
    }
-};
-
-simplArr();
 
 
 
+   everyDay.innerHTML = week[i];
+   document.body.append(everyDay);
 
+}
 
-
-
-
-
-
-
-// function isSimple(n) {
-//    if (n === 1 || n === 0) {
-//       return false;
-//    } else {
-//       for (let i = 2; i < n; i++) {
-//          if (n % i === 0) {
-//             return false;
-//          }
-//       }
-//       return true;
-//    }
-// }
 
 
