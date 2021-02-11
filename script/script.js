@@ -3,17 +3,11 @@
 let exactTime;
 let exactTimePartTwo;
 
-let second1;
-let minute1;
-let hour1;
-let mounth1;
-let dateNow1;
-
 function myClock() {
 
-   let weekArr = [ 'Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-         mounthArr = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'],
-         now = new Date(),
+   let    now = new Date(),
+         weekDay =now.toLocaleString('ru', {weekday: 'long'}),
+         mounthDay = now.toLocaleString('ru', {month: 'long'}),
          second = now.getSeconds(),
          minute = now.getMinutes(),
          hour = now.getHours(),
@@ -21,56 +15,45 @@ function myClock() {
          mounth = now.getMonth(),
          dateNow = now.getDate();
 
-   
-   const formatHour = function(hour) {
-      if (hour === 1 || hour === 21) {
-         return 'час';
-      } else if (hour > 1 && hour <= 4 || hour ===22 || hour === 23) {
-         return 'часа';
-      } else if (hour > 4 && hour <= 20 || hour === 0) {
-         return 'часов';
-      } 
-   };
-   
-   const formatMinute = function (minute) {
-      let a = minute % 10;
-      if (a === 1) {
-         return 'минута';
-      } else if (a === 0 || a === 5 || a === 6 || a === 7 || a === 8 || a === 9) {
-         return 'минут';
-      } else if (a === 2 || a === 3 || a === 4) {
-         return 'минуты';
-      } 
-   };
-   
-   const formatSecond = function (second) {
-      let a = second % 10;
-      if (second === 11 || second === 12 || second === 13 || second === 14) {
-         return 'секунд';
-      } else if (a === 1) {
-         return 'секунда';
-      } else if (a === 0 || a === 5 || a === 6 || a === 7 || a === 8 || a === 9) {
-         return 'секунд';
-      } else if (a === 2 || a === 3 || a === 4) {
-         return 'секунды';
+   weekDay = weekDay.charAt(0).toUpperCase() + weekDay.substr(1);
+
+   const formatMonth = function(tmp){
+      if (tmp.slice(-1) === 'ь' || tmp.slice(-1) === 'й') {
+         return tmp.substring(0, tmp.length - 1) + 'я';
+      } else {
+         return tmp + 'а';
       }
    };
-   
-   exactTime = 'Сегодня ' + weekArr[now.getDay()] + ', ' + dateNow + ' ' + mounthArr[mounth] + ' ' + year + ' года, ' + hour + ' ' + formatHour(hour) + ' ' + minute + ' ' + formatMinute(minute) + ' ' + second + ' ' + formatSecond(second);
+
+   const formatNum = function(n, text){
+      let n1 = n % 10;
+      if ( n1 === 1){
+         return text[0];
+      } else if ( n1 > 1 && n1 < 5){
+         return text[1];
+      } else if (n > 10 && n < 20){
+         return text[2];
+      } 
+         return text[2];
+      
+   };
+
+   exactTime = 'Сегодня ' + weekDay + ', ' + dateNow + ' ' + formatMonth(mounthDay) + ' ' + year + ' года, ' + hour + formatNum(hour, [' час', ' часа', ' часов']) + ' ' + minute + formatNum(minute, [' минута', ' минуты', ' минут']) + ' ' + second + formatNum(second, [' секунда', ' секунды', ' секунд']);
 
 
       
 
    function formatTime() {
-      second1 = (second < 10) ? '0' + second : second;
-      minute1 = (minute < 10) ? '0' + minute : minute;
-      hour1 = (hour < 10) ? '0' + hour : hour;
-      mounth1 = (mounth + 1 < 10) ? '0' + (mounth + 1) : (mounth + 1);
-      dateNow1 = (dateNow < 10) ? '0' + dateNow : dateNow;
+      second = (second < 10) ? '0' + second : second;
+      minute = (minute < 10) ? '0' + minute : minute;
+      hour = (hour < 10) ? '0' + hour : hour;
+      mounth = (mounth + 1 < 10) ? '0' + (mounth + 1) : (mounth + 1);
+      dateNow = (dateNow < 10) ? '0' + dateNow : dateNow;
 
    }
    formatTime();
-   exactTimePartTwo = dateNow1 + '.' + mounth1 + '.' + year + ' - ' + hour1 + ':' + minute1 + ':' + second1;
+
+   exactTimePartTwo = dateNow + '.' + mounth + '.' + year + ' - ' + hour + ':' + minute + ':' + second;
    
 }
 
