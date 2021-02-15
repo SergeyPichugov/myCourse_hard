@@ -6,7 +6,7 @@ const btn = document.getElementById('change'),
       body = document.querySelector('body');
 
 const changeColor = function(){
-         let random = Math.ceil(Math.random() * 16777215).toString(16);
+         let random = Math.floor(Math.random() * 16777216).toString(16);
          body.style.backgroundColor = '#' + random;
          nameColor.textContent = '#' + random;
 };
@@ -14,3 +14,4 @@ const changeColor = function(){
 changeColor();
 
 btn.addEventListener('click', changeColor);
+
