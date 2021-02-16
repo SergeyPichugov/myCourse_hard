@@ -1,7 +1,7 @@
 'use strict';
 
 
-const DomElement = function (selector, height, width, bg, fontSize) {
+const DomElement = function (selector = '.some', height = '100px', width = '250px', bg = 'potato', fontSize = '15px') {
    this.selector = selector;
    this.height = height;
    this.width = width;
@@ -22,14 +22,60 @@ const DomElement = function (selector, height, width, bg, fontSize) {
          document.body.append(elem);
       }
       
-      elem.textContent = 'Мой новый созданный элемент';
-      elem.style.cssText = `height: ${height}; width: ${width}; background: ${bg}; font-size: ${fontSize}`;
+      elem.textContent = '';
+      elem.style.cssText = `height: ${height}; width: ${width}; background: ${bg}; font-size: ${fontSize};
+      position: absolute`;
 
    };
 
 };
 
-let myElem = new DomElement('.best', '50px', '350px', 'red', '20px');
-myElem.createElem();
+let myElem = new DomElement('.best', '100px', '100px', 'red', '20px');
+
+document.addEventListener('DOMContentLoaded', function () {
+   myElem.createElem();
+});
+
+
+const moveBlock = function (btn) {
+   const myBlock = document.querySelector('.best');
+
+   let topMargin = window.getComputedStyle(myBlock);
+   let leftMargin = window.getComputedStyle(myBlock);
+   let leftMove = parseInt(leftMargin.left);
+   let topMove = parseInt(topMargin.top);
+
+   if (btn.key === 'ArrowUp'){
+      topMove -= 10;
+      if(topMove > 0){
+         myBlock.style.top = topMove + 'px';
+      }
+   }
+
+   if (btn.key === 'ArrowDown') {
+      topMove += 10;
+      if (topMove > 0){
+         myBlock.style.top = topMove + 'px';
+      }
+   }
+
+   if (btn.key === 'ArrowLeft') {
+      leftMove -= 10;
+      if (leftMove > 0){
+         myBlock.style.left = leftMove + 'px';
+      }
+   }
+   
+   if (btn.key === 'ArrowRight') {
+      leftMove += 10;
+      if (leftMove > 0){
+         myBlock.style.left = leftMove + 'px';
+      }
+   }
+};
+
+document.addEventListener('keydown', moveBlock);
+
+
 
 
