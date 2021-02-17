@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
    myElem.createElem();
 });
 
-
 const moveBlock = function (btn) {
    const myBlock = document.querySelector('.best');
 
@@ -45,32 +44,37 @@ const moveBlock = function (btn) {
    let leftMove = parseInt(leftMargin.left);
    let topMove = parseInt(topMargin.top);
 
+   let maxWidth = document.documentElement.clientWidth;
+   let maxHeight = document.documentElement.clientHeight;
+
    if (btn.key === 'ArrowUp'){
       topMove -= 10;
       if(topMove > 0){
-         myBlock.style.top = topMove + 'px';
+         myBlock.style.top = `${topMove}px`;
       }
    }
 
    if (btn.key === 'ArrowDown') {
       topMove += 10;
-      if (topMove > 0){
-         myBlock.style.top = topMove + 'px';
+      if (topMove < maxHeight - parseInt(myElem.height)) {
+         myBlock.style.top = `${topMove}px`;
       }
    }
 
    if (btn.key === 'ArrowLeft') {
       leftMove -= 10;
       if (leftMove > 0){
-         myBlock.style.left = leftMove + 'px';
+         myBlock.style.left = `${leftMove}px`;
       }
    }
    
    if (btn.key === 'ArrowRight') {
       leftMove += 10;
-      if (leftMove > 0){
-         myBlock.style.left = leftMove + 'px';
-      }
+      console.log('leftMove: ', leftMove);
+
+      if (leftMove < maxWidth - parseInt(myElem.width)) {
+         myBlock.style.left = `${leftMove}px`;
+      } 
    }
 };
 
